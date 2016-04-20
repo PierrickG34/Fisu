@@ -1,4 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
+    <entity name="Activities" representedClassName="Activity" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateFin" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subscribe" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="located" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Locations" inverseName="activity" inverseEntity="Locations" syncable="YES"/>
+        <relationship name="presented" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Speakers" inverseName="activities" inverseEntity="Speakers" syncable="YES"/>
+        <relationship name="visited" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Visits" inverseName="activities" inverseEntity="Visits" syncable="YES"/>
+    </entity>
+    <entity name="Locations" representedClassName="Location" syncable="YES">
+        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="restaurant" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="activity" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activities" inverseName="located" inverseEntity="Activities" syncable="YES"/>
+        <relationship name="visitEnd" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Visits" inverseName="end" inverseEntity="Visits" syncable="YES"/>
+        <relationship name="visitStart" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Visits" inverseName="start" inverseEntity="Visits" syncable="YES"/>
+        <fetchedProperty name="fetchedProperty" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Locations"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="Speakers" representedClassName="Speaker" syncable="YES">
+        <attribute name="abstract" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="age" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="surname" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activities" inverseName="presented" inverseEntity="Activities" syncable="YES"/>
+    </entity>
+    <entity name="Visits" representedClassName="Visit" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="timeStart" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activities" inverseName="visited" inverseEntity="Activities" syncable="YES"/>
+        <relationship name="end" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Locations" inverseName="visitEnd" inverseEntity="Locations" syncable="YES"/>
+        <relationship name="start" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Locations" inverseName="visitStart" inverseEntity="Locations" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Activities" positionX="-360" positionY="180" width="128" height="195"/>
+        <element name="Locations" positionX="-630" positionY="-89" width="128" height="179"/>
+        <element name="Speakers" positionX="-263" positionY="-18" width="128" height="163"/>
+        <element name="Visits" positionX="-639" positionY="254" width="128" height="133"/>
+    </elements>
 </model>
